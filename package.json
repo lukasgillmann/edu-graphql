@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "@apollo/server": "^4.5.0",
+    "@apollo/utils.keyvadapter": "^1.1.2",
+    "@as-integrations/aws-lambda": "^1.0.1",
+    "@escape.tech/graphql-armor": "^1.4.0",
+    "@vendia/serverless-express": "^4.10.1",
+    "apollo-server-core": "^3.12.0",
+    "axios": "^1.1.3",
+    "cheerio": "^1.0.0-rc.12",
+    "connect-timeout": "^1.9.0",
+    "download": "^8.0.0",
+    "express-useragent": "^1.0.15",
+    "googleapis": "^111.0.0",
+    "graphql": "^16.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "keyv": "^4.5.0",
+    "mongodb": "^4.11.0",
+    "pusher": "^5.1.1-beta",
+    "serverless-mysql": "^1.5.4",
+    "uuid": "^9.0.0",
+    "vimeo": "^2.1.1"
+  },
+  "scripts": {
+    "start": "sls offline start --reloadHandler"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1243.0",
+    "eslint": "^8.34.0",
+    "serverless-deployment-bucket": "^1.6.0",
+    "serverless-offline": "^11.2.0",
+    "serverless-offline-watcher": "^1.0.0"
+  }
+}

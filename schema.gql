@@ -1,0 +1,1103 @@
+type CourseShortItem {
+  id: String
+  display_name: String
+  short_description: String
+  course_image_url: String
+  created: String
+}
+
+type Download {
+  course_id: String
+  course_title: String
+  sections: [DownloadSection]
+}
+
+type DownloadSection {
+  section_id: String
+  section_title: String
+  downloads: [DownloadItem]
+}
+
+type DownloadItem {
+  def_id: String
+  href: String
+  displayName: String
+}
+
+############### Discussion Comments ###############
+type CommentListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [CommentItem]
+}
+
+type CommentItem {
+  _id: String
+  author_id: Int
+  author_name: String
+  author_fullname: String
+  avatar: String
+  cover: String
+  visible: Boolean
+  role: String
+  course_id: String
+  discussion_id: String
+  course_title: String
+  section_title: String
+  sequence_title: String
+  vertical_title: String
+  body: String
+  files: [String]
+  vote_up_count: Int
+  vote_down_count: Int
+  created_at: String
+  reply: [CommentReply]
+}
+
+type CommentReply {
+  author_id: Int
+  author_name: String
+  author_fullname: String
+  avatar: String
+  cover: String
+  comment: String
+  visible: Boolean
+  role: String
+  body: String
+  files: [String]
+  created_at: String
+}
+
+############## Discussion Create ##############
+input CommentCreateInput {
+  author_name: String
+  author_fullname: String
+  visible: Boolean
+  course_id: String
+  discussion_id: String
+  course_title: String
+  section_title: String
+  sequence_title: String
+  vertical_title: String
+  body: String
+  files: [String]
+}
+
+input CommentEditInput {
+  comment_id: String
+  body: String
+  files: [String]
+  visible: Boolean
+}
+
+input CommentThirdInput {
+  comment_id: String
+  author_name: String
+  author_fullname: String
+  visible: Boolean
+  body: String
+  files: [String]
+}
+
+########### Student Answer ################
+input StudentAnswerInput {
+  module_id: String
+  course_id: String
+  raw_possible: Int
+  choices: [StudentChoice]
+}
+
+input StudentChoice {
+  id: String
+  correctness: String
+  student_answer: String
+  input_state: String
+  isAnswerArray: Boolean
+  msg: String
+  hint: String
+  hintmode: String
+  queuestate: String
+  answervariable: String
+}
+
+############# Review #################
+input ReviewEditInput {
+  course_id: String
+  vertical_id: String
+  section_title: String
+  sequence_title: String
+  vertical_title: String
+  type: String
+  content: String
+}
+
+####################### Login History ########################
+type LoginAddOutput {
+  jwt: String
+  success: Boolean
+  permission: String
+}
+
+####################### Module Inspect #######################
+input ModuleInspectEditInput {
+  course_id: String
+  hash: String
+  module_title: String
+  total_spent: Float
+  quiz_spent: Float
+  correct_count: Int
+  total_count: Int
+  progress: Int
+}
+
+type ModuleInspectListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  total_spent: Float
+  quiz_spent: Float
+  data: [ModuleInspectItem]
+}
+
+type ModuleInspectItem {
+  _id: String
+  course_id: String
+  course_title: String
+  total_spent: Float
+  quiz_spent: Float
+  date: String
+  details: ModuleInspectDetail
+}
+
+type ModuleInspectDetail {
+  module_title: String
+  total_spent: Float
+  quiz_spent: Float
+  correct_count: Int
+  total_count: Int
+}
+
+############################ Meeting Inspect ################################
+type MeetingInspectListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  total_spent: Float
+  data: [MeetingInspectItem]
+}
+
+type MeetingInspectItem {
+  date: String
+  course_id: String
+  details: MeetingInspectDetail
+}
+
+type MeetingInspectDetail {
+  event_id: String
+  spent: Int
+  instructor_name: String
+  attempts: Int
+}
+
+############################ Vimeo Inspect ################################
+input VimeoInspectEditInput {
+  course_id: String
+  vimeo_id: String
+  module_title: String
+  vimeo_title: String
+  seek: String
+  duration: String
+  spent: Int
+  hash: String
+}
+
+type VimeoInspectGetOutput {
+  vimeo_id: String
+  seek: String
+}
+
+type VimeoInspectListOutput {
+  total: Int
+  data: [VimeoInspectItem]
+}
+
+type VimeoInspectItem {
+  vimeo_id: String
+  module_title: String
+  vimeo_title: String
+  seek: String
+  duration: String
+  spent: Int
+}
+
+############################# Replay Inspect ###############################
+type ReplayInspectListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  total_spent: Float
+  data: [ReplayInspectItem]
+}
+
+type ReplayInspectItem {
+  date: String
+  details: ReplayInspectDetail
+}
+
+type ReplayInspectDetail {
+  event_id: String
+  file_id: String
+  topic: String
+  spent: Int
+  instructor_name: String
+}
+
+input ReplayInspectEditInput {
+  course_id: String!
+  event_id: String!
+  file_id: String!
+  topic: String
+  spent: Int!
+  instructor_name: String
+  hash: String
+}
+
+############################# User List ####################################
+type UserShortItem {
+  id: Int
+  email: String
+  username: String
+  first_name: String
+  last_name: String
+  is_active: Boolean
+  avatar: String
+  cover: String
+  permission: String
+}
+
+type UserCourseItem {
+  id: String
+  display_name: String
+  short_description: String
+  run_start: String
+  run_end: String
+  course_image_url: String
+  created: String
+}
+
+############################# Group List ########################################
+type GroupListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [GroupItem]
+}
+
+type GroupItem {
+  id: Int
+  name: String
+  cover_url: String
+  description: String
+  created: String
+  updated: String
+  users: [GroupUser]
+  courses: [GroupCourse]
+}
+
+type GroupUser {
+  id: Int
+  username: String
+  first_name: String
+  last_name: String
+  email: String
+  is_active: Boolean
+  avatar: String
+  cover: String
+  permission: String
+}
+
+type GroupCourse {
+  id: String
+  is_active: Boolean
+  display_name: String
+  short_description: String
+  run_start: String
+  run_end: String
+  course_image_url: String
+  created: String
+}
+
+############################# Category ########################################
+type CategoryListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [CategoryItem]
+}
+
+type CategoryItem {
+  id: Int
+  name: String
+  admin_editable: Boolean
+  created: String
+  courses: [CourseShortItem]
+}
+
+############################# Email ########################################
+type EmailTemplateItem {
+  id: Int
+  type: String
+  schedule: String
+  end_user: String
+  content: String
+  enabled: Boolean
+  created: String
+  updated: String
+  admin_email: String
+  subject: String
+  variable: [String]
+}
+
+input EmailTemplateEditInput {
+  id: Int
+  type: String
+  enabled: Boolean
+  schedule: String
+  end_user: String
+  content: String
+  admin_email: String
+  subject: String
+}
+
+type EmailLogListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [EmailLogItem]
+}
+
+type EmailLogItem {
+  _id: String
+  time: String
+  type: String
+  to: String
+  fullname: String
+  avatar: String
+  cover: String
+  permission: String
+  course: String
+}
+
+############################# SMS ########################################
+type SMSTemplateItem {
+  id: Int
+  type: String
+  content: String
+  variable: [String]
+  enabled: Boolean
+  created: String
+  updated: String
+}
+
+input SMSTemplateEditInput {
+  id: Int
+  type: String
+  content: String
+  enabled: Boolean
+}
+
+type SmsLogListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [SMSLogItem]
+}
+
+type SMSLogItem {
+  _id: String
+  time: String
+  type: String
+  to: String
+}
+
+############################# Analysis ########################################
+type CourseGradeListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [CourseGradeItem]
+}
+
+type CourseGradeItem {
+  course_id: String
+  course_title: String
+  course_image_url: String
+  progress: Int
+  created: String
+  enroll_start: String
+  cutoff: Float
+  grade: Float
+  total_spent: Float
+  quiz_spent: Float
+  sections: [CourseGradeSection]
+}
+
+type CourseGradeSection {
+  sectionTitle: String
+  weight: Float
+  gradeFormat: String
+  raw_possible: Int
+  raw_earned: Int
+}
+
+############################# Tutor ########################################
+type TutorListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [TutorItem]
+}
+
+type TutorItem {
+  id: Int
+  first_name: String
+  last_name: String
+  email: String
+  phone_number: String
+  country: String
+  state: String
+  city: String
+  gender: String
+  bio: String
+  year_of_birth: Int
+  avatar: String
+}
+
+input TutorEditInput {
+  id: Int
+  first_name: String
+  last_name: String
+  email: String
+  phone_number: String
+  country: String
+  state: String
+  city: String
+  gender: String
+  bio: String
+  year_of_birth: Int
+  avatar: String
+}
+
+############################# Coach ########################################
+type CoachListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [CoachItem]
+}
+
+type CoachItem {
+  id: Int
+  first_name: String
+  last_name: String
+  email: String
+  phone_number: String
+  country: String
+  state: String
+  city: String
+  gender: String
+  bio: String
+  year_of_birth: Int
+  avatar: String
+  courses: [CourseShortItem]
+}
+
+input CoachEditInput {
+  id: Int
+  first_name: String
+  last_name: String
+  email: String
+  phone_number: String
+  country: String
+  state: String
+  city: String
+  gender: String
+  bio: String
+  year_of_birth: Int
+  avatar: String
+  course_ids: [String]
+}
+
+############################# Theme ########################################
+type ThemeItem {
+  name: String
+  value: String
+  default: Boolean
+}
+
+############################# License ########################################
+type LicenseListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [LicenseItem]
+}
+
+type LicenseItem {
+  id: Int
+  username: String
+  first_name: String
+  last_name: String
+  email: String
+  display_name: String
+  short_description: String
+  course_image_url: String
+  start: String
+  end: String
+  is_active: Boolean
+}
+
+input LicenseAddInput {
+  type: String
+  quantity: Int
+  unit_price: Int
+  annual: Boolean
+}
+
+############################# Dashbaord ########################################
+type Dashboard {
+  course_enrollment: [MonthCounterPair]
+  course_complete: [MonthCounterPair]
+  best_courses: [BestCourse]
+  numbers: DashboardStatistic
+  license: LicenseNumber
+}
+
+type LicenseNumber {
+  license_available: Int
+  credit_available: Int
+  license_total: Int
+  credit_total: Int
+  license_disabled: Int
+  credit_disabled: Int
+}
+
+type BestCourse {
+  counter: Int
+  course_id: String
+}
+
+type MonthCounterPair {
+  month: Int
+  counter: Int
+}
+
+type DashboardStatistic {
+  total_course: Int
+  total_user: Int
+  total_course_active: Int
+  total_user_active: Int
+  total_spent_avg: Float
+  quiz_spent_avg: Float
+  login_count_avg: Float
+}
+
+############################# CertificateItem #################################
+input CertificateInput {
+  course_id: String
+  course_title: String
+  module_title: String
+  is_final: Boolean
+  is_save: Boolean
+  total: Int
+}
+
+############################# CertificateItem Variable #################################
+input CertificateVariableInput {
+  comment: String
+  location: String
+  phone_number: String
+  contact_email: String
+  siret_number: String
+  sign_top: String
+  sign_bottom: String
+}
+
+############################# Login History Item #####################
+type LoginHistoryListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [LoginHistoryItem]
+}
+
+type LoginHistoryItem {
+  date: String
+  device: String
+  ip_address: String
+  browser: String
+}
+
+type BulkUserOutput {
+  first_user_id: Int
+  total: Int
+  possible: Int
+}
+
+type UserOutput {
+  insertId: Int
+  errorCode: Int
+}
+
+input CourseDuration {
+  course_id: String
+  display_name: String
+  objective: String
+  short_description: String
+  category_id: Int
+  list: [UnitDuration]
+}
+
+input UnitDuration {
+  section_title: String
+  sequence_title: String
+  vertical_title: String
+  duration: Int
+}
+
+input CourseUnitInput {
+  course_id: String
+  vertical_id: String
+  discussion_id: String
+  vimeo_id: String
+  definition_ids: [String]
+  router_url: String
+}
+
+input SurveyEmail {
+  question: String
+  answer: String
+}
+
+############################# Chat #####################
+type ChatHistoryListOutput {
+  message_more: Boolean
+  page: Int
+  messages: [ChatHistoryItem]
+}
+
+type ChatHistoryItem {
+  text: String
+  urls: [String]
+  to_admin: Boolean
+  created: String
+  updated: String
+}
+
+type ChatUserOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [ChatUserItem]
+}
+
+type ChatUserItem {
+  id: Int
+  user_id: Int
+  fullname: String
+  username: String
+  email: String
+  avatar: String
+  phone_number: String
+  permission: String
+  role: String
+  location: String
+  count: Int
+  enabled: Boolean
+  created: String
+  updated: String
+  page: Int
+  message_more: Boolean
+  messages: [ChatHistoryItem]
+}
+
+####################### CourseItem Sync #####################
+input CourseVersion {
+  _id: String
+  wiki_slug: String
+  published_branch: String
+}
+
+type CourseDifference {
+  new_versions: String
+  diff_versions: String
+  structures: String
+  defs: String
+  counter: Int
+  sql_data: String
+}
+
+##################### Physical Session ##################
+input PhysicalSessionInput {
+  id: Int
+  coach_name: String
+  subject: String
+  program: String
+  location: String
+  signature: String
+  start: String
+  duration: Int
+}
+
+type PhysicalSessionListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [PhysicalSessionItem]
+}
+
+type PhysicalSessionItem {
+  id: Int
+  coach_name: String
+  subject: String
+  program: String
+  location: String
+  signature: String
+  start: String
+  duration: Int
+  total_assigned: Int
+  total_signed: Int
+  users: [UserShortItem]
+}
+
+type PhysicalSessionUserListOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [PhysicalSessionUserItem]
+}
+
+type PhysicalSessionUserItem {
+  id: Int
+  user_id: Int
+  email: String
+  username: String
+  first_name: String
+  last_name: String
+  created: String
+  updated: String
+  status: Boolean
+}
+
+input NameValue {
+  name: String
+  value: String
+}
+
+type UserChartListOutput {
+  total_module_spent: Int
+  total_quiz_spent: Int
+  total_virtual_spent: Int
+  total_replay_spent: Int # min
+  start: String
+  end: String
+  data: [[String]]
+}
+
+type ChartListOutput {
+  start: String
+  end: String
+  actives: Int
+  data: [[String]]
+}
+
+type SearchListOutput {
+  courses: [CourseSearchItem]
+  users: [UserSearchItem]
+}
+
+type CourseSearchItem {
+  id: String
+  display_name: String
+  course_image_url: String
+  category: String
+  created: String
+  page: Int
+  page_index: Int
+}
+
+type UserSearchItem {
+  id: Int
+  username: String
+  email: String
+  first_name: String
+  last_name: String
+  avatar: String
+  created: String
+  permission: String
+  group_name: String
+  page: Int
+  page_index: Int
+}
+
+type MasterPlatformItem {
+  site_name: String
+  path: String
+  env: String
+  updated: String
+  user_total: Int
+  course_total: Int
+  virtual_total: Int
+  physical_total: Int
+  license_total: Int
+  license_available: Int
+  license_disabled: Int
+}
+
+type MasterPlatformDetail {
+  site_name: String
+  site_display_name: String
+  admin_email: String
+  base_domain: String
+  gql_version: Int
+}
+
+type MasterDashboard {
+  platforms: [MasterPlatformItem]
+  user: UserShortItem
+}
+
+type MasterPlatformStatus {
+  site_name: String
+  user_total: Int
+  course_total: Int
+  virtual_total: Int
+  physical_total: Int
+  license_total: Int
+  license_available: Int
+  license_disabled: Int
+}
+
+################# Meeting ##################
+type MeetingOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [MeetingItem]
+}
+
+type MeetingItem {
+  id: Int
+  topic: String
+  room: String
+  description: String
+  start_time: String
+  duration: Int
+  tutor_id: Int
+  tutor_name: String
+  tutor_avatar: String
+  courses: [CourseShortItem]
+}
+
+type MeetingUpcomingOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [MeetingUpcomingItem]
+}
+
+type MeetingUpcomingItem {
+  id: Int
+  topic: String
+  description: String
+  status: String
+  start_time: String
+  duration: Int
+  tutor_id: Int
+  tutor_name: String
+  tutor_avatar: String
+}
+
+type MeetingRecordingOutput {
+  total: Int
+  page: Int
+  page_size: Int
+  data: [MeetingRecordingItem]
+}
+
+type MeetingRecordingItem {
+  id: Int
+  room: String
+  file_id: String
+  topic: String
+  description: String
+  start_time: String
+  duration: Int
+  tutor_avatar: String
+  tutor_name: String
+}
+
+#########################################################################################
+type Query {
+  admin_dashboard_get: String
+  admin_user_inspect_get(user_id: Int): String
+  admin_user_report_get(user_id: Int): String
+  admin_dashboard_chart_list(course_id: String, start: String, end: String): ChartListOutput
+  admin_track_chart_list(start: String, end: String): ChartListOutput
+
+  ana_login_history(user_id: Int, page: Int, page_size: Int): LoginHistoryListOutput
+  ana_grade_per_course(user_id: Int, page: Int, page_size: Int): CourseGradeListOutput
+  ana_meeting(user_id: Int, page: Int, page_size: Int): MeetingInspectListOutput
+  ana_module(user_id: Int, page: Int, page_size: Int): ModuleInspectListOutput
+
+  app_dashboard_get: String
+  app_course_detail_get(course_id: String): String
+  app_course_unit_get(input: CourseUnitInput): String
+
+  coach_list(page: Int, page_size: Int): CoachListOutput
+  category_list(page: Int, page_size: Int): CategoryListOutput
+  chat_list(user_id: Int, page: Int, page_size: Int): ChatHistoryListOutput
+  chat_user_list(enabled: Boolean, page: Int, page_size: Int): ChatUserOutput
+  comment_list(course_id: String, discussion_id: String, page: Int, page_size: Int): CommentListOutput
+  comment_whole_list(page: Int, page_size: Int): CommentListOutput
+  comment_recent_list: [CommentItem]
+  comment_count: Int
+  course_list(page: Int, page_size: Int, search_term: [NameValue]): String
+
+  dashboard_get: Dashboard
+  email_template_list: [EmailTemplateItem]
+  email_log_list(page: Int, page_size: Int): EmailLogListOutput
+  email_all_log_list: EmailLogListOutput
+  group_list(page: Int, page_size: Int): GroupListOutput
+
+  inspect_module_list(course_id: String, page: Int, page_size: Int): ModuleInspectListOutput
+  inspect_meeting_list(course_id: String, page: Int, page_size: Int): MeetingInspectListOutput
+  inspect_vimeo_list(course_id: String, page: Int, page_size: Int): VimeoInspectListOutput
+  inspect_vimeo_get(course_id: String, vimeo_id: String): VimeoInspectGetOutput
+  inspect_replay_list(course_id: String, page: Int, page_size: Int): ReplayInspectListOutput
+
+  license_list(page: Int, page_size: Int): LicenseListOutput
+  meeting_token_get(platform: String!, room: String!, email: String!): String
+  meeting_list(page: Int, page_size: Int): MeetingOutput
+  meeting_upcoming_list(user_id: Int, page: Int, page_size: Int): MeetingUpcomingOutput
+  meet_recording_list(course_id: String, page: Int, page_size: Int): MeetingRecordingOutput
+
+  master_dashboard_get(jwt: String!): MasterDashboard
+  master_platform_list(jwt: String!): [MasterPlatformItem]
+  master_platform_get(path: String): MasterPlatformDetail
+  master_platform_status_get: MasterPlatformStatus
+
+  physical_session_list(page: Int, page_size: Int): PhysicalSessionListOutput
+  physical_session_user_list(session_id: String, page: Int, page_size: Int): PhysicalSessionUserListOutput
+
+  send_survey_email(input: [SurveyEmail]): Boolean
+  search_list(search_term: String): SearchListOutput
+  send_email(email: String, name: String, html: String): Boolean
+  send_pwd_reset_email(email: String): Boolean
+  send_coach_email(email: String, name: String, html: String): Boolean
+  send_sms(phone: String, message: String): Boolean
+  sms_template_list: [SMSTemplateItem]
+  sms_log_list(page: Int, page_size: Int): SmsLogListOutput
+
+  tutor_list(page: Int, page_size: Int): TutorListOutput
+  theme_list: [ThemeItem]
+
+  user_login_log_list(page: Int, page_size: Int): LoginHistoryListOutput
+  user_email_exist(email: String): Boolean
+  user_list(page: Int, page_size: Int): String
+  user_course_list(user_id: Int): [UserCourseItem]
+  user_ghost_token_get(user_id: Int): String
+  user_send_reminders(user_ids: [Int]): Boolean
+  user_comment_list(user_id: Int, page: Int, page_size: Int): CommentListOutput
+  user_chart_list(user_id: Int, start: String, end: String): UserChartListOutput
+
+  z_query(input: String): String
+  z_pop(domain: String, path: String): [String]
+}
+
+type Mutation {
+  category_edit(category_id: Int, name: String, course_ids: [String]): Int
+  category_assign_courses(category_id: Int, course_ids: [String]): Boolean
+  category_dismiss_courses(category_id: Int, course_ids: [String]): Boolean
+  category_delete(category_id: Int): Boolean
+
+  chat_add(event_id: String, urls: [String], text: String): Boolean
+  chat_edit(event_id: String, urls: [String], text: String, created: String): Boolean
+  chat_delete_one(user_id: Int, created: String): Boolean
+  chat_delete_all(user_id: Int): Boolean
+  chat_flag_edit(enabled: Boolean): Boolean
+  chat_user_enabled(user_id: Int, enabled: Boolean): Boolean
+
+  certificate_create(input: CertificateInput): Boolean
+  certificate_variable_edit(input: CertificateVariableInput): Boolean
+  clean_mongo_courses: Boolean
+  coach_edit(input: CoachEditInput): Int
+  coach_delete(coach_id: Int): Boolean
+  course_delete(course_id: String): Boolean
+  course_info_edit(input: CourseDuration): Boolean
+
+  comment_create(input: CommentCreateInput): String
+  comment_edit(input: CommentEditInput): Boolean
+  comment_third_edit(input: CommentThirdInput): Boolean
+  comment_vote_edit(comment_id: String, is_up: Boolean): Boolean
+  comment_delete(comment_id: String!): Boolean
+
+  email_template_edit(input: EmailTemplateEditInput): Boolean
+  group_edit(group_id: Int, name: String, cover_url: String, description: String): Int
+  group_assign_users(group_id: Int, user_ids: [Int]): Boolean
+  group_dismiss_users(group_id: Int, user_ids: [Int]): Boolean
+  group_assign_courses(group_id: Int, course_ids: [String]): Boolean
+  group_dismiss_courses(group_id: Int, course_ids: [String]): Boolean
+  group_delete(group_id: Int): Boolean
+
+  license_add(type: Int, price: Int, quantity: Int, annual: Boolean): Boolean
+  license_delete(license_id: Int): Boolean
+
+  master_platform_edit(site_name: String!, site_display_name: String!, admin_email: String!, gql_version: Int!, env: String!): Boolean
+  module_inspect_edit(input: ModuleInspectEditInput): Boolean
+  meeting_create(topic: String, description: String, start_time: String, duration: Int, course_ids: [String!], tutor_id: Int): String
+  meeting_edit(room: String!, topic: String, description: String, start_time: String, duration: Int, course_ids: [String!], tutor_id: Int): Boolean
+  meeting_delete(room: String!): Boolean
+  meeting_recording_create(platform: String!, room: String!, url: String!): Boolean
+  meet_inspect_edit(platform: String!, room: String!, email: String!): Boolean
+
+  physical_edit(input: PhysicalSessionInput): Int
+  physical_assign_users(session_id: Int, user_ids: [Int]): Boolean
+  physical_dismiss_users(session_id: Int, user_ids: [Int]): Boolean
+  physical_delete(session_id: Int): Boolean
+
+  replay_inspect_edit(input: ReplayInspectEditInput): Boolean
+  review_edit(input: ReviewEditInput): Boolean
+  reset_platform: Boolean
+
+  sync_course_differences(input: [CourseVersion]): CourseDifference
+  sms_template_edit(input: SMSTemplateEditInput): Boolean
+  tutor_edit(input: TutorEditInput): Int
+  tutor_delete(tutor_id: Int): Boolean
+  theme_edit(input: [NameValue]): Boolean
+  term_edit(content: String, enabled: Boolean): Boolean
+
+  user_edit(input: [NameValue]): Boolean
+  user_login(email: String, password: String): LoginAddOutput
+  user_delete(user_id: Int): Boolean
+  user_answer_edit(input: [StudentAnswerInput]): Boolean
+  user_other_edit(user_id: Int, input: [NameValue]): Boolean
+  user_other_pwd_edit(user_id: Int, new_password: String): Boolean
+  user_register(input: [NameValue]): UserOutput
+  user_bulk_register(input: [[NameValue]]): BulkUserOutput
+  user_assign_courses(user_id: Int, course_ids: [String]): Int
+  user_dismiss_courses(user_id: Int, course_ids: [String]): Boolean
+  user_enroll_update(user_id: Int, course_id: String, run_end: String): Boolean
+  user_forget_password(user_id: Int, new_password: String, password_hash: String): Boolean
+
+  vimeo_inspect_edit(input: VimeoInspectEditInput): Boolean
+
+  z_mutation(input: String): Boolean
+  z_mutation1: Boolean
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
